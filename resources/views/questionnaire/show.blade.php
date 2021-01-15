@@ -9,7 +9,9 @@
 
                 <div class="card-body">
                     <a href="{{ route('question.create', $questionnaire->id) }}" class="btn btn-dark">Add new question</a>
+                    @if($questionnaire->questions()->count())
                     <a href="{{ route('survey.show', ['questionnaire' => $questionnaire->id, 'slug' => Str::slug($questionnaire->title)]) }}" class="btn btn-dark">Take a survey</a>
+                    @endif
                 </div>
             </div>
 

@@ -28,7 +28,7 @@ class QuestionnaireController extends Controller
 
         request()->user()->questionnaires()->create($data);
 
-        return redirect()->route('qustionnaires.index');
+        return redirect()->route('questionnaires.index');
     }
 
     public function show(Questionnaire $questionnaire)
