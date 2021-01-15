@@ -22,12 +22,20 @@
                 <div class="card-body">
                     <ul class="list-group">
                         @foreach($question->answers as $answer)
-                        {{-- <input type="radio" name="" id=""> --}}
                         <li class="list-group-item"> {{ $answer->answer }} </li>
                         @endforeach
                     </ul>
+                    <div class="mt-2">
+                        <form action="{{ route('question.delete', ['questionnaire' => $questionnaire->id, 'question' => $question->id]) }}" method="post">
+                            @csrf
+                            @method('delete')
+
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </div>
                 </div>
             </div>
+
             @endforeach
         </div>
     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Question;
 use App\Questionnaire;
 use Illuminate\Http\Request;
 
@@ -23,5 +24,13 @@ class QuestionController extends Controller
         $question->answers()->createMany(request('answers'));
 
         return redirect()->route('questionnaire.show', $questionnaire->id);
+    }
+
+    public function delete(Questionnaire $questionnaire, Question $question)
+    {
+        $question->answers()->delete();
+        $question->delete();
+
+        return back();
     }
 }

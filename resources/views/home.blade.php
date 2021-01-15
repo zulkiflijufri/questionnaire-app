@@ -17,6 +17,16 @@
                     <a href="{{ route('questionnaire.create') }}" class="btn btn-dark">Create a new questionnaire</a>
                 </div>
             </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <ul class="list-group">
+                        @foreach($questionnaires as $questionnaire)
+                        <li class="list-group-item"><a href="{{ route('questionnaire.show', $questionnaire->id) }}">{{ $questionnaire->title }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>

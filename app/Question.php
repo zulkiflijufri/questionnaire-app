@@ -8,7 +8,7 @@ class Question extends Model
 {
     protected $guarded = [];
 
-    public function questionnaires()
+    public function questionnaire()
     {
         return $this->belongsTo(Questionnaire::class);
     }
