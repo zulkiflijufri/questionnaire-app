@@ -22,7 +22,14 @@
                 <div class="card-body">
                     <ul class="list-group">
                         @foreach($questionnaires as $questionnaire)
-                        <li class="list-group-item"><a href="{{ route('questionnaire.show', $questionnaire->id) }}">{{ $questionnaire->title }}</a></li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <a href="{{ route('questionnaire.show', $questionnaire->id) }}">{{ $questionnaire->title }}</a>
+                            <form action="{{ route('questionnaire.delete', $questionnaire->id) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </li>
                         @endforeach
                     </ul>
                 </div>

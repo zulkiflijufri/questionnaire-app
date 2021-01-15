@@ -17,7 +17,7 @@ class CreateSurveyResponsesTable extends Migration
             $table->id();
             $table->foreignId('survey_id')->constrained();
             $table->foreignId('question_id')->constrained();
-            $table->foreignId('answer_id')->constrained();
+            $table->foreignId('answer_id')->constrained()->nullable();
             $table->timestamps();
         });
     }

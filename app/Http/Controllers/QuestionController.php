@@ -28,6 +28,7 @@ class QuestionController extends Controller
 
     public function delete(Questionnaire $questionnaire, Question $question)
     {
+        $question->responses()->delete();
         $question->answers()->delete();
         $question->delete();
 

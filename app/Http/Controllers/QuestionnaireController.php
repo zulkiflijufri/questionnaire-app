@@ -37,4 +37,23 @@ class QuestionnaireController extends Controller
 
         return view('questionnaire.show', compact('questionnaire'));
     }
+
+    public function delete(Questionnaire $questionnaire)
+    {
+        // delete responses
+        foreach ($questionnaire->questions as $question) {
+            foreach ($question->answers as $answer) {
+                $answer->responses()->delete();
+            }
+
+            // delete answers
+            $question->answers()->delete();
+        }
+
+        $questionnaire->questions()->delete();
+        $questionnaire->surveys()->delete();
+        $questionnaire->delete();
+
+        return back();
+    }
 }

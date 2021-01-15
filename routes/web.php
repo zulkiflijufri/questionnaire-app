@@ -25,6 +25,7 @@ Route::get('/questionnaires', 'QuestionnaireController@index')->name('questionna
 Route::get('/questionnaires/create', 'QuestionnaireController@create')->name('questionnaire.create');
 Route::post('/questionnaires/store', 'QuestionnaireController@store')->name('questionnaire.store');
 Route::get('/questionnaires/{questionnaire}/show', 'QuestionnaireController@show')->name('questionnaire.show');
+Route::delete('/questionnaires/{questionnaire}', 'QuestionnaireController@delete')->name('questionnaire.delete');
 
 Route::get('/questionnaires/{questionnaire}/question/create', 'QuestionController@create')->name('question.create');
 Route::post('/questionnaires/{questionnaire}/question/store', 'QuestionController@store')->name('question.store');
