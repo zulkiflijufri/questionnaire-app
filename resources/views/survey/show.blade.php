@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-8 col-lg-5" style="overflow:auto; height:500px; position:relative">
 
-            <h1>{{ $questionnaire->title }}</h1>
+            <h3>Questionnaire: {{ $questionnaire->title }} </h3>
 
             <form action="{{ route('survey.store', ['questionnaire' => $questionnaire->id, 'slug' => Str::slug($questionnaire->title)]) }}" method="post">
                 @csrf
