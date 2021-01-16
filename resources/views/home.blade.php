@@ -21,7 +21,7 @@
             <div class="card mt-3">
                 <div class="card-body">
                     <ul class="list-group">
-                        @foreach($questionnaires as $questionnaire)
+                        @forelse($questionnaires as $questionnaire)
                         <li class="list-group-item d-flex justify-content-between">
                             <a href="{{ route('questionnaire.show', $questionnaire->id) }}">{{ $questionnaire->title }}</a>
                             <form action="{{ route('questionnaire.delete', $questionnaire->id) }}" method="post">
@@ -30,7 +30,9 @@
                                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                             </form>
                         </li>
-                        @endforeach
+                        @empty
+                        <h3 class="text-center">No questionnaire</h3>
+                        @endforelse
                     </ul>
                 </div>
             </div>

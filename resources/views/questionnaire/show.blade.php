@@ -25,13 +25,14 @@
                         <li class="list-group-item"> {{ $answer->answer }} </li>
                         @endforeach
                     </ul>
-                    <div class="mt-2">
+                    <div class="mt-2 d-flex">
                         <form action="{{ route('question.delete', ['questionnaire' => $questionnaire->id, 'question' => $question->id]) }}" method="post">
                             @csrf
                             @method('delete')
 
                             <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                         </form>
+                        <a href="{{ route('question.edit', ['questionnaire' => $questionnaire->id, 'question' => $question->id]) }}" class="btn btn-sm btn-info ml-2 text-white">Edit</a>
                     </div>
                 </div>
             </div>
