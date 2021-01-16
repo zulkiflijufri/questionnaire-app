@@ -6,6 +6,7 @@ use App\Answer;
 use App\Question;
 use App\Questionnaire;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class QuestionController extends Controller
 {
@@ -16,13 +17,40 @@ class QuestionController extends Controller
 
     public function store(Questionnaire $questionnaire)
     {
-        $this->validate(request(), [
-            'question.question' => 'required',
-            'answers.*.answer' => 'required',
-        ]);
+        if (request('question_type') == 'radio' || request('question_type') == 'checkbox') {
+            $messages = [
+                'question.question.required' => 'The question is required bro',
+                'answers.*.answer.required' => 'The answers can not be null'
+            ];
 
-        $question = $questionnaire->questions()->create(request('question'));
-        $question->answers()->createMany(request('answers'));
+            $this->validate(request(), [
+                'question.question' => 'required',
+                'answers.*.answer' => 'required',
+            ], $messages);
+
+            dd(request()->all());
+
+            /**
+             * TODO: insert data only question and answers
+             */
+        } elseif (request('question_type') == 'text' || request('question_type') == 'textarea') {
+            $messages = ['questionInput.question.required' => 'The question is required'];
+
+            $this->validate(request(), [
+                'questionInput.question' => 'required',
+            ], $messages);
+
+            dd($request->all());
+            /**
+             * TODO: insert data only questionInput
+             */
+        }
+
+        $question = $questionnaire->questions()->create(request('question')); // remember: insert question_type
+
+        if (request('question_type') == 'radio' || request('question_type') == 'checkbox') {
+            $question->answers()->createMany(request('answers'));
+        }
 
         return redirect()->route('questionnaire.show', $questionnaire->id);
     }
@@ -51,7 +79,7 @@ class QuestionController extends Controller
         ]);
 
         // dd(request('answers.0.answer'));
-        $questionnaire->questions()->update(request('question'));
+        $question->update(request('question'));
 
         foreach ($question->answers as $key => $answer) {
             # code...
